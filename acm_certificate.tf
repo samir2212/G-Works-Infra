@@ -15,7 +15,7 @@ resource "aws_acm_certificate" "cert" {
     certificate_transparency_logging_preference = "ENABLED"
   }
 
-  #lifecycle {
-  #create_before_destroy = true
-  #}
+  lifecycle {
+    create_before_destroy = true
+  }
 }

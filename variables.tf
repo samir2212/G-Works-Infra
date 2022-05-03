@@ -10,7 +10,7 @@ variable "env" {
 
 variable "aws_region" {
   type    = string
-  default = "eu-central-1"
+  default = "eu-north-1"
 }
 
 variable "username" {
@@ -20,7 +20,7 @@ variable "username" {
 
 variable "az_list" {
   type    = list(any)
-  default = ["eu-central-1a", "eu-central-1b"]
+  default = ["eu-north-1a", "eu-north-1b"]
 }
 
 variable "vpc_cidr" {
@@ -50,7 +50,7 @@ variable "vpc_cidr_private_b" {
 
 variable "env_file" {
   type    = string
-  default = "dev.env"
+  default = "prod.env"
 }
 
 variable "ecs_php_app" {
@@ -58,5 +58,5 @@ variable "ecs_php_app" {
 }
 
 variable "php_app_image" {
-  default = "414882576784.dkr.ecr.eu-central-1.amazonaws.com/php_app-prod:ecs-dev-test"
+  default = "141204083709.dkr.ecr.eu-central-1.amazonaws.com/php_app-prod:ecs-dev-test"
 }

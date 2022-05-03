@@ -3,7 +3,7 @@ terraform {
     bucket         = "g-works-terraform-state-prod"
     key            = "initial_setup/terraform.tfstate"
     dynamodb_table = "terraform-state-lock-dynamo-prod"
-    region         = "eu-central-1"
+    region         = "eu-north-1"
     encrypt        = true
   }
 }
@@ -69,7 +69,7 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
     type = "S"
   }
 }
-/*
+
 resource "aws_s3_bucket_policy" "g-works-terraform-state-bucket-policy" {
   bucket = "g-works-terraform-state-${var.env}"
   policy = <<POLICY
@@ -93,4 +93,3 @@ resource "aws_s3_bucket_policy" "g-works-terraform-state-bucket-policy" {
 }
 POLICY
 }
-*/
