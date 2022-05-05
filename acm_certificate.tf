@@ -1,14 +1,14 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "g.works"
+  domain_name       = "talovisio.fi"
   validation_method = "DNS"
 
   tags = {
-    Name        = "g.works"
+    Name        = "talovisio.fi"
     Environment = "${var.env}"
   }
 
   subject_alternative_names = [
-    "www.g.works",
+    "*.talovisio.fi",
   ]
 
   options {
