@@ -30,17 +30,50 @@ module "alb" {
   enable_http2                     = true
   enable_cross_zone_load_balancing = true
   listener_ssl_policy_default      = "ELBSecurityPolicy-TLS-1-2-2017-01"
-  /*
+
   # Waiting for customer to validate certificate
-   https_listeners = [
-     {
-       port               = 443
-       protocol           = "HTTPS"
-       certificate_arn    = aws_acm_certificate.cert.arn
-       target_group_index = 0
-     },
+  https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = aws_acm_certificate.cert.arn
+      target_group_index = 0
+    },
   ]
-  */
+
+
+  https_listener_rules = [
+    {
+      https_listener_index = 0
+      priority             = 1
+
+      actions = [
+        {
+          type               = "forward"
+          target_group_index = 0
+        }
+      ]
+
+      conditions = [{
+        host_headers = var.api-domain-name
+      }]
+    },
+    {
+      https_listener_index = 0
+      priority             = 2
+
+      actions = [
+        {
+          type               = "forward"
+          target_group_index = 1
+        }
+      ]
+
+      conditions = [{
+        host_headers = var.domain-name
+      }]
+    }
+  ]
 
   target_groups = [
     {
@@ -59,19 +92,36 @@ module "alb" {
         timeout             = 5
         unhealthy_threshold = 2
       }
+    },
+    {
+      name_prefix      = "pref-"
+      backend_protocol = "HTTP"
+      backend_port     = 3000
+      target_type      = "ip"
+      health_check = {
+        enabled             = true
+        healthy_threshold   = 5
+        interval            = 30
+        matcher             = "200"
+        path                = "/"
+        port                = "traffic-port"
+        protocol            = "HTTP"
+        timeout             = 5
+        unhealthy_threshold = 2
+      }
     }
   ]
 
   http_tcp_listeners = [
     {
-      port     = 80
-      protocol = "HTTP"
-      #action_type = "redirect"
-      #redirect = {
-      #port        = "443"
-      #protocol    = "HTTPS"
-      #status_code = "HTTP_301"
-      #}
+      port        = 80
+      protocol    = "HTTP"
+      action_type = "redirect"
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
     }
   ]
 }
