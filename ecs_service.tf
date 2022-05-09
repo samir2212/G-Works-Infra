@@ -19,6 +19,10 @@ resource "aws_ecs_task_definition" "php_app_task_definition" {
         {
           containerPort = 80
           hostPort      = 80
+        },
+        {
+          containerPort = 3000
+          hostPort      = 3000
         }
       ]
       logConfiguration = {
@@ -52,6 +56,13 @@ resource "aws_ecs_service" "ecs_service" {
     container_name   = var.ecs_php_app
     container_port   = 80
   }
+
+    load_balancer {
+    target_group_arn = module.alb.target_group_arns[1]
+    container_name   = var.ecs_php_app
+    container_port   = 3000
+  }
+  
   network_configuration {
     security_groups = [module.sg_alb.security_group_id]
     subnets         = module.vpc.private_subnets
