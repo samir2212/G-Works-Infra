@@ -57,12 +57,12 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = 80
   }
 
-    load_balancer {
+  load_balancer {
     target_group_arn = module.alb.target_group_arns[1]
     container_name   = var.ecs_php_app
     container_port   = 3000
   }
-  
+
   network_configuration {
     security_groups = [module.sg_alb.security_group_id]
     subnets         = module.vpc.private_subnets
@@ -71,6 +71,7 @@ resource "aws_ecs_service" "ecs_service" {
     Name        = var.ecs_php_app,
     Environment = var.env
   }
+  depends_on = [module.alb, module.ecs, module.vpc]
 }
 
 resource "aws_cloudwatch_log_group" "php_log_group" {
