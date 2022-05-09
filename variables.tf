@@ -18,6 +18,14 @@ variable "username" {
   default = "admin"
 }
 
+variable "api-domain-name" {
+  default = ["api.talovisio.fi"]
+}
+
+variable "domain-name" {
+  default = ["talovisio.fi"]
+}
+
 variable "az_list" {
   type    = list(any)
   default = ["eu-north-1a", "eu-north-1b"]
