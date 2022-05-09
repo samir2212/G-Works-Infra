@@ -77,7 +77,7 @@ module "alb" {
 
   target_groups = [
     {
-      name_prefix      = "pref-"
+      name             = "api"
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "ip"
@@ -94,7 +94,7 @@ module "alb" {
       }
     },
     {
-      name_prefix      = "pref-"
+      name             = "front-end"
       backend_protocol = "HTTP"
       backend_port     = 3000
       target_type      = "ip"
