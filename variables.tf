@@ -23,7 +23,7 @@ variable "api-domain-name" {
 }
 
 variable "domain-name" {
-  default = ["talovisio.fi"]
+  default = ["beta.talovisio.fi"]
 }
 
 variable "az_list" {
