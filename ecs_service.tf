@@ -49,7 +49,7 @@ resource "aws_ecs_service" "ecs_service" {
   launch_type                       = "FARGATE"
   desired_count                     = 1
   task_definition                   = aws_ecs_task_definition.php_app_task_definition.arn
-  health_check_grace_period_seconds = 360
+  health_check_grace_period_seconds = 36000
 
   load_balancer {
     target_group_arn = module.alb.target_group_arns[0]
