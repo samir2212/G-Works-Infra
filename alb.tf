@@ -14,6 +14,10 @@ module "sg_alb" {
       rule        = "https-443-tcp"
       cidr_blocks = "0.0.0.0/0"
     },
+    {
+      rule        = "customtcp-3000-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
   ]
   egress_rules = ["all-all"]
 }
