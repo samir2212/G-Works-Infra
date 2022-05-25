@@ -15,7 +15,10 @@ module "sg_alb" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      rule        = "customtcp-3000-tcp"
+      from_port   = 3000
+      to_port     = 3000
+      protocol    = "tcp"
+      description = "Front-end-service-ports"
       cidr_blocks = "0.0.0.0/0"
     },
   ]
