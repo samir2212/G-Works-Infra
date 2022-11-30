@@ -66,5 +66,5 @@ variable "ecs_php_app" {
 }
 
 variable "php_app_image" {
-  default = "141204083709.dkr.ecr.eu-north-1.amazonaws.com/php_app-prod:master_754e2dc2"
+  default = "141204083709.dkr.ecr.eu-north-1.amazonaws.com/php_app-prod:master_f8618d4f"
 }
